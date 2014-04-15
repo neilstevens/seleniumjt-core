@@ -21,10 +21,26 @@
 			<arg value="clean" />
 		</exec>
 	</target>
+	
+	<target name="maven-release:prepare">
+		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
+			<arg value="clean" />
+			<arg value="release:prepare" />
+		</exec>
+	</target>
+	
+	<target name="maven-release:perform">
+		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
+			<arg value="clean" />
+			<arg value="release:perform" />
+		</exec>
+	</target>
 
 	<target name="maven-deploy">
 		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
+			<arg value="clean" />
 			<arg value="deploy" />
+			<arg value="-Dgpg.passphrase=P34rlJ4m2020" />
 		</exec>
 	</target>
 
