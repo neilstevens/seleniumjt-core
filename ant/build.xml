@@ -1,0 +1,39 @@
+<project name="SeleniumJT-Core" default="maven-clean-install" basedir="../">
+
+	<property file="my.build.properties"/>
+	
+	<target name="maven-clean-install">
+		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
+			<arg value="clean" />
+			<arg value="install" />
+			<arg value="-Dmaven.test.skip" />
+		</exec>
+	</target>
+
+	<target name="maven-eclipse-eclipse">
+		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
+			<arg value="eclipse:eclipse" />
+		</exec>
+	</target>
+	
+	<target name="maven-clean">
+		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
+			<arg value="clean" />
+		</exec>
+	</target>
+
+	<target name="maven-deploy">
+		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
+			<arg value="deploy" />
+		</exec>
+	</target>
+
+	<target name="jar-source">
+		<jar destfile="distribution/seleniumjt-core.src.jar">
+		    <fileset dir="${basedir}/src/main/java" includes="**/*.java"/>
+		</jar>
+	</target>
+
+</project>
+
+
