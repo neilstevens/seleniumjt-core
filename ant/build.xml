@@ -1,6 +1,7 @@
 <project name="SeleniumJT-Core" default="maven-clean-install" basedir="../">
 
 	<property file="my.build.properties" />
+	<property name="core.version" value="1.2.1"></property>
 
 	<target name="maven-clean-install">
 		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
@@ -11,7 +12,7 @@
 		<antcall target="sign-code"></antcall>
 		<antcall target="sign-src"></antcall>
 		<antcall target="sign-docs"></antcall>
-		<copyfile dest="${basedir}/target/seleniumjt-core-1.2.pom" src="${repository}\net\sf\seleniumjt\seleniumjt-core\1.2\seleniumjt-core-1.2.pom"/>
+		<copyfile dest="${basedir}/target/seleniumjt-core-${core.version}.pom" src="${repository}\net\sf\seleniumjt\seleniumjt-core\${core.version}\seleniumjt-core-${core.version}.pom"/>
 		<antcall target="sign-pom"></antcall>
 	</target>
 
@@ -30,28 +31,28 @@
 	<target name="sign-src">
 		<exec osfamily="winnt" executable="${gpg.loc}\gpg" failonerror="true">
 			<arg value="-ab" />
-			<arg value="${basedir}/target/seleniumjt-core-1.2-sources.jar" />
+			<arg value="${basedir}/target/seleniumjt-core-${core.version}-sources.jar" />
 		</exec>
 	</target>
 
 	<target name="sign-code">
 		<exec osfamily="winnt" executable="${gpg.loc}\gpg" failonerror="true">
 			<arg value="-ab" />
-			<arg value="${basedir}/target/seleniumjt-core-1.2.jar" />
+			<arg value="${basedir}/target/seleniumjt-core-${core.version}.jar" />
 		</exec>
 	</target>
 
 	<target name="sign-pom">
 		<exec osfamily="winnt" executable="${gpg.loc}\gpg" failonerror="true">
 			<arg value="-ab" />
-			<arg value="${basedir}/target/seleniumjt-core-1.2.pom" />
+			<arg value="${basedir}/target/seleniumjt-core-${core.version}.pom" />
 		</exec>
 	</target>
 
 	<target name="sign-docs">
 		<exec osfamily="winnt" executable="${gpg.loc}\gpg" failonerror="true">
 			<arg value="-ab" />
-			<arg value="${basedir}/target/seleniumjt-core-1.2-javadoc.jar" />
+			<arg value="${basedir}/target/seleniumjt-core-${core.version}-javadoc.jar" />
 		</exec>
 	</target>
 

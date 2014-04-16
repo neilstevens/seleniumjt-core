@@ -2,3 +2,4 @@
 target/
 my.build.properties
 release.properties
+.classpath

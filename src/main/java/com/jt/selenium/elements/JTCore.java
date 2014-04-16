@@ -16,6 +16,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.seleniumemulation.JavascriptLibrary;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,6 @@ import com.jt.selenium.configuration.SeleniumConfiguration;
 import com.jt.selenium.utils.JTContainer;
 import com.jt.selenium.utils.LogExecTime;
 import com.thoughtworks.selenium.SeleniumException;
-import com.thoughtworks.selenium.webdriven.JavascriptLibrary;
 
 @Component
 public class JTCore {
