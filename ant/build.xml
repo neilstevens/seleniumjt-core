@@ -1,13 +1,18 @@
 <project name="SeleniumJT-Core" default="maven-clean-install" basedir="../">
 
-	<property file="my.build.properties"/>
-	
+	<property file="my.build.properties" />
+
 	<target name="maven-clean-install">
 		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
 			<arg value="clean" />
 			<arg value="install" />
 			<arg value="-Dmaven.test.skip" />
 		</exec>
+		<antcall target="sign-code"></antcall>
+		<antcall target="sign-src"></antcall>
+		<antcall target="sign-docs"></antcall>
+		<copyfile dest="${basedir}/target/seleniumjt-core-1.2.pom" src="${repository}\net\sf\seleniumjt\seleniumjt-core\1.2\seleniumjt-core-1.2.pom"/>
+		<antcall target="sign-pom"></antcall>
 	</target>
 
 	<target name="maven-eclipse-eclipse">
@@ -15,39 +20,39 @@
 			<arg value="eclipse:eclipse" />
 		</exec>
 	</target>
-	
+
 	<target name="maven-clean">
 		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
 			<arg value="clean" />
 		</exec>
 	</target>
-	
-	<target name="maven-release:prepare">
-		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
-			<arg value="clean" />
-			<arg value="release:prepare" />
-		</exec>
-	</target>
-	
-	<target name="maven-release:perform">
-		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
-			<arg value="clean" />
-			<arg value="release:perform" />
+
+	<target name="sign-src">
+		<exec osfamily="winnt" executable="${gpg.loc}\gpg" failonerror="true">
+			<arg value="-ab" />
+			<arg value="${basedir}/target/seleniumjt-core-1.2-sources.jar" />
 		</exec>
 	</target>
 
-	<target name="maven-deploy">
-		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
-			<arg value="clean" />
-			<arg value="deploy" />
-			<arg value="-Dgpg.passphrase=P34rlJ4m2020" />
+	<target name="sign-code">
+		<exec osfamily="winnt" executable="${gpg.loc}\gpg" failonerror="true">
+			<arg value="-ab" />
+			<arg value="${basedir}/target/seleniumjt-core-1.2.jar" />
 		</exec>
 	</target>
 
-	<target name="jar-source">
-		<jar destfile="distribution/seleniumjt-core.src.jar">
-		    <fileset dir="${basedir}/src/main/java" includes="**/*.java"/>
-		</jar>
+	<target name="sign-pom">
+		<exec osfamily="winnt" executable="${gpg.loc}\gpg" failonerror="true">
+			<arg value="-ab" />
+			<arg value="${basedir}/target/seleniumjt-core-1.2.pom" />
+		</exec>
+	</target>
+
+	<target name="sign-docs">
+		<exec osfamily="winnt" executable="${gpg.loc}\gpg" failonerror="true">
+			<arg value="-ab" />
+			<arg value="${basedir}/target/seleniumjt-core-1.2-javadoc.jar" />
+		</exec>
 	</target>
 
 </project>
