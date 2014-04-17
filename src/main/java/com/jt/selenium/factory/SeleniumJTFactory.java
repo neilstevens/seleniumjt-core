@@ -22,7 +22,7 @@ import com.jt.selenium.utils.PropertiesHelper;
 public class SeleniumJTFactory
 {
 	
-	private static final String IE_DRIVER = FileHelper.getExtractedFile("IEDriverServer");
+	private static final String IE_DRIVER = "IEDriverServer";
 	private static final String WEBDRIVER_IE_DRIVER = "webdriver.ie.driver";
 	private static final String WEBDRIVER_FIREFOX_BIN = "webdriver.firefox.bin";
 	private static final String FIREFOX_EXE_LOCATION = "firefox.exe.location";
