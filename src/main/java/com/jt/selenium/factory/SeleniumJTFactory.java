@@ -1,6 +1,8 @@
 package com.jt.selenium.factory;
 
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -30,6 +32,8 @@ public class SeleniumJTFactory
     private static final String CHROMEDRIVER_WIN_LOC = "chromedriver.exe";
     private static final String PHANTOM_WIN_LOC = "phantomjs.exe";
     private static final String CHROMEDRIVER_LINUX_LOC = "chromedriver";
+    
+    protected static final Log logger = LogFactory.getLog(SeleniumJTFactory.class);
 	
 
 	private static SeleniumJT sjt;
@@ -54,9 +58,20 @@ public class SeleniumJTFactory
         if(SystemUtils.IS_OS_LINUX) {
             chromdriverLoc = CHROMEDRIVER_LINUX_LOC;
         }
-        String loc = String.format("%s/%s", config.getWebDriverLocation(), chromdriverLoc);
-		System.setProperty(WEBDRIVER_SYSTEM_PROPERTY, loc);
+		System.setProperty(WEBDRIVER_SYSTEM_PROPERTY, getWebDriverLocation(config, "chrome", chromdriverLoc));
 		return new ChromeDriver();
+	}
+
+	private static String getWebDriverLocation(SeleniumConfiguration config, String key, String loc) {
+		String webDriverLocation;
+        
+        try {
+        	webDriverLocation = config.getWebDriverLocation(key);
+        } catch (Exception e) {
+			webDriverLocation = String.format("%s/target/jtcore/%s", SeleniumConfiguration.getOperationalDirectory(), loc);
+		}
+        logger.info("Getting web driver from "+webDriverLocation);
+		return webDriverLocation;
 	}
 
 	private static WebDriver getPhantomDriver(SeleniumConfiguration config) {
@@ -64,7 +79,7 @@ public class SeleniumJTFactory
 		dCaps.setJavascriptEnabled(true);
 		String[] args = { "--ignore-ssl-errors=yes" };
 		dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, args);
-        System.setProperty(PHANTOM_JS_LOC, String.format("%s/%s", config.getWebDriverLocation(), PHANTOM_WIN_LOC));
+        System.setProperty(PHANTOM_JS_LOC, getWebDriverLocation(config, "phantom", PHANTOM_WIN_LOC));
 		return new PhantomJSDriver(dCaps);
 	}
 
@@ -76,7 +91,7 @@ public class SeleniumJTFactory
 	private static WebDriver getIEDriver(SeleniumConfiguration config) {
 		String driverVersion = config.get("ieDriverVersion");
 		String ieDriver = driverVersion==null? IE_DRIVER+"32.exe" : IE_DRIVER+driverVersion+".exe";
-		System.setProperty(WEBDRIVER_IE_DRIVER, String.format("%s/%s", config.getWebDriverLocation(), ieDriver));
+		System.setProperty(WEBDRIVER_IE_DRIVER, getWebDriverLocation(config, "ie", ieDriver));
 		return new InternetExplorerDriver();
 	}
 	

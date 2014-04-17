@@ -19,7 +19,7 @@ public class SeleniumConfiguration
 	private final String AJAX_TIMEOUT = "AJAX_TIMEOUT";
 	private final String COMMAND_REPEAT_MILS = "COMMAND_REPEAT_MILS";
 	private final String RETRY_ATTEMPTS = "RETRY_ATTEMPTS";
-	private final String WEBDRIVER_LOC = "webdriver.location";
+	private final String WEBDRIVER_LOC = "webdriver.location.";
 
 	private Properties properties;
 
@@ -123,8 +123,8 @@ public class SeleniumConfiguration
 		return Integer.valueOf(getProperty(COMMAND_REPEAT_MILS));
 	}
 
-	public String getWebDriverLocation() {
-		return get(WEBDRIVER_LOC);
+	public String getWebDriverLocation(String browser) {
+		return get(WEBDRIVER_LOC+browser);
 	}
 
 }
