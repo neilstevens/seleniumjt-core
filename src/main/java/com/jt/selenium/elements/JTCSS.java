@@ -15,6 +15,7 @@ public class JTCSS
 
 	public void verifyCssClass(String locator, String value)
 	{
+		jtCore.waitForElementPresent(locator);
 		String aValue = "";
 		if (jtCore.isVisible(locator))
 		{

@@ -21,6 +21,7 @@ public class JTEvent
 
 	public void clickNoValidation(String locator)
 	{
+		jtCore.waitForElementPresent(locator);
 		WebElement element = jtCore.getElement(locator);
 		element.click();
 	}
@@ -39,6 +40,7 @@ public class JTEvent
 
 	public void selectWindow(String locator, int tries)
 	{
+		jtCore.waitForElementPresent(locator);
 		jtCore.getWebDriver().switchTo().window(locator);
 	}
 
@@ -47,6 +49,7 @@ public class JTEvent
 	 */
 	public void dragAndDropToObject(String locator, String targetLocator)
 	{
+		jtCore.waitForElementPresent(locator);
 		(new Actions(jtCore.getWebDriver())).dragAndDrop(jtCore.getElement(locator), jtCore.getElement(targetLocator)).perform();
 	}
 
@@ -61,6 +64,7 @@ public class JTEvent
 
 	public void focus(String locator)
 	{
+		jtCore.waitForElementPresent(locator);
 		jtCore.fireEvent(locator, "focus");
 	}
 

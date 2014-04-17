@@ -19,6 +19,7 @@ public class JTInput
 
 	String getSelectedLabel(String locator)
 	{
+		jtCore.waitForElementPresent(locator);
 		return new Select(jtCore.getElement(locator)).getFirstSelectedOption().getText();
 
 	}
@@ -40,12 +41,14 @@ public class JTInput
 
 	public void check(String locator)
 	{
+		jtCore.waitForElementPresent(locator);
 		WebElement element = jtCore.getElement(locator);
 		element.click();
 	}
 
 	public void uncheck(String locator)
 	{
+		jtCore.waitForElementPresent(locator);
 		jtCore.getElement(locator).click();
 //		locator = getLocator(locator);
 //		waitForElementPresent(locator);
@@ -54,11 +57,13 @@ public class JTInput
 
 	public void attachFile(String locator, String fileUrl)
 	{
+		jtCore.waitForElementPresent(locator);
 		type(locator, fileUrl);
 	}
 
 	public void type(String locator, String value)
 	{
+		jtCore.waitForElementPresent(locator);
 		WebElement element = jtCore.getElement(locator);
 		element.clear();
 		element.sendKeys(value);
@@ -81,6 +86,7 @@ public class JTInput
 	}
 
 	public void select(String locator, String value) {
+		jtCore.waitForElementPresent(locator);
 		WebElement element = jtCore.getElement(locator);
 		Select selectBox = new Select(element);
 		selectBox.selectByValue(value);
@@ -89,6 +95,7 @@ public class JTInput
 
 	public String getValue(String locator)
 	{
+		jtCore.waitForElementPresent(locator);
 		return jtCore.getAttribute(locator, "value");
 	}
 
@@ -106,6 +113,7 @@ public class JTInput
 	}
 
 	public void typeHidden(String locator, String value) {
+		jtCore.waitForElementPresent(locator);
 		jtCore.executeJavaScript(String.format("document.getElementById('%s').value = '%s';", locator, value));
 	}
 }
