@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.seleniumjt</groupId>
 	<artifactId>seleniumjt-core</artifactId>
-	<version>1.2.1</version>
+	<version>1.2.2</version>
 
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>SeleniumJT is a Selenium2 wrapper framework that simplifies the coding required for getting you tests up and running fast. In addition to encapsulating the idiosyncrasies of Selenium WebDriver it also supplies a more reliable testing framework for dynamic web pages by allowing elements time for conditions to be met before failure, times that are fully customisable.</description>
