@@ -1,7 +1,7 @@
 <project name="SeleniumJT-Core" default="maven-clean-install" basedir="../">
 
 	<property file="my.build.properties" />
-	<property name="core.version" value="1.2.2"></property>
+	<property name="core.version" value="1.2.3"></property>
 
 	<target name="maven-clean-install">
 		<exec osfamily="winnt" executable="${mvn.loc}" failonerror="true">
