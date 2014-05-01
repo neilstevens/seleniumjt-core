@@ -59,8 +59,8 @@ public class JTCore {
 		verifyNoJavaScriptErrorOnPage();
 		verifyPageLoadedCorrectly();
 	}
-	
-	
+
+
 	public void screenShot(String fileName) throws IOException {
 		if (!StringUtils.endsWith(fileName, ".gif")) {
 			fileName+=".gif";
@@ -73,9 +73,9 @@ public class JTCore {
 		FileUtils.copyFile(scrFile, new File(pathname+fileName));
 	}
 
-	public void executeJavaScript(String script) {
+	public Object executeJavaScript(String script) {
 		JavascriptExecutor executor = (JavascriptExecutor) getWebDriver();
-		executor.executeScript(script);
+		return executor.executeScript(script);
 	}
 
 	private void verifyPageLoadedCorrectly() {

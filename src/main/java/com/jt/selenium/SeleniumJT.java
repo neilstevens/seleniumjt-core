@@ -134,8 +134,8 @@ public class SeleniumJT
 	}
 	
 	@LogExecTime
-	public void executeJavaScript(String script) {
-		jtCore.executeJavaScript(script);
+	public Object executeJavaScript(String script) {
+		return jtCore.executeJavaScript(script);
 	}
 	
 	public void runJavaScript(String script) {
@@ -211,8 +211,8 @@ public class SeleniumJT
 	 * 					document.write('<div id="js_error"><div id="js_error_head">A JavaScript error occurred on line: ' + line + '</div><div id="js_error_msg">Details: '+msg+'</div></div>'); 
 	 * 				}
 	 * 		</SCRIPT>
-	 * </pre>
-	 * 
+	 * </pre> 
+	 *
 	 **/
 	@LogExecTime
 	public void verifyNoJavaScriptErrorOnPage()
