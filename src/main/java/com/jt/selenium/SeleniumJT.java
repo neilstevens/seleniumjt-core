@@ -30,12 +30,12 @@ import com.jt.selenium.utils.LogExecTime;
 @Component
 public class SeleniumJT
 {
-	
+
 	/**
 	 * This will save your screen shots to a location specified by the property 'screenshot.loc'
-	 * 
+	 *
 	 * @param fileName Should be a gif. If '.gif' is not added to the filename it will be changed.
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public void screenShot(String fileName) throws IOException {
@@ -57,22 +57,22 @@ public class SeleniumJT
 
 	@Autowired
 	private JTCSS jtCSS;
-	
+
 	@Autowired
 	private JTEvent jtEvent;
-	
+
 	@Autowired
 	private JTImage jtImage;
-	
+
 	@Autowired
 	private JTInput jtInput;
-	
+
 	@Autowired
 	private JTTinyMce jtTinyMce;
-	
+
 	@Autowired
 	private JTLocalStorage localStorage;
-	
+
 	@LogExecTime
 	public WebElement getElementByTagName(String locator) {
 		return jtCore.getElementByTagName(locator);
@@ -92,15 +92,15 @@ public class SeleniumJT
 	public void waitForAlert() {
 		jtCore.waitForAlert();
 	}
-	
+
 	public void setTestData(Properties testData) {
 		this.testData = testData;
 	}
-	
+
 	public void setWebDriver(WebDriver driver) {
 		jtCore.getJtContainer().setDriver(driver);
 	}
-	
+
 	public void removeItemFromLocalStorage(String item) {
 		localStorage.removeItemFromLocalStorage(item);
 	}
@@ -132,12 +132,12 @@ public class SeleniumJT
 	public WebDriver getWebDriver() {
 		return jtCore.getJtContainer().getWebDriver();
 	}
-	
+
 	@LogExecTime
 	public Object executeJavaScript(String script) {
 		return jtCore.executeJavaScript(script);
 	}
-	
+
 	public void runJavaScript(String script) {
 		jtCore.executeJavaScript(script);
 	}
@@ -147,7 +147,7 @@ public class SeleniumJT
 	public void windowFocus() {
 		jtCore.windowFocus();
 	}
-	
+
 	public void stop() {
 		jtCore.getJtContainer().stop();
 	}
@@ -164,7 +164,7 @@ public class SeleniumJT
 
 	/**
 	 * Verify that the src of the image [identified by it's id] is correct
-	 * 
+	 *
 	 * @param locator
 	 * @param src
 	 */
@@ -204,14 +204,14 @@ public class SeleniumJT
 	/**
 	 * Make sure no JavaScript error occurred. There is a special JavaScript function added to the code that outputs a div with the id js_error if an error has
 	 * happened.
-	 * 
+	 *
 	 * <pre>
-	 * 	 	<SCRIPT> 
+	 * 	 	<SCRIPT>
 	 * 				window.onerror = function(msg, err_url, line) {
-	 * 					document.write('<div id="js_error"><div id="js_error_head">A JavaScript error occurred on line: ' + line + '</div><div id="js_error_msg">Details: '+msg+'</div></div>'); 
+	 * 					document.write('<div id="js_error"><div id="js_error_head">A JavaScript error occurred on line: ' + line + '</div><div id="js_error_msg">Details: '+msg+'</div></div>');
 	 * 				}
 	 * 		</SCRIPT>
-	 * </pre> 
+	 * </pre>
 	 *
 	 **/
 	@LogExecTime
@@ -246,7 +246,7 @@ public class SeleniumJT
 
 	/**
 	 * Looks for a substring within the element
-	 * 
+	 *
 	 * @param locator
 	 * @param value
 	 */
@@ -282,7 +282,7 @@ public class SeleniumJT
 
 	/**
 	 * Verifies the value of text within the given element.
-	 * 
+	 *
 	 * @param locator
 	 *            the element.
 	 * @param value
@@ -335,7 +335,7 @@ public class SeleniumJT
 	/**
 	 * Custom method for typing text into a tinyMce which is formed of an embedded iframe html page which we need to target and type into. After we have typed
 	 * our value we then need to exit the selected iFrame and return to the main page.
-	 * 
+	 *
 	 * @param locator
 	 * @param value
 	 */
@@ -352,7 +352,7 @@ public class SeleniumJT
 	}
 
 	/**
-	 * 
+	 *
 	 * @param targetFrame
 	 */
 	@LogExecTime
@@ -386,7 +386,7 @@ public class SeleniumJT
 
 	/**
 	 * After clicking something that invokes an Ajax event we need to wait for some value to return before we can continue.
-	 * 
+	 *
 	 * @param text
 	 *            The text to wait for
 	 */
@@ -476,6 +476,17 @@ public class SeleniumJT
 		jtInput.selectAndWait(locator, value);
 	}
 
+	public void selectByText(String locator, String value)
+	{
+		jtInput.selectByText(locator, value);
+	}
+
+	@LogExecTime
+	public void selectByTextAndWait(String locator, String value)
+	{
+		jtInput.selectByTextAndWait(locator, value);
+	}
+
 	@LogExecTime
 	public String getInputValue(String locator)
 	{
@@ -496,7 +507,7 @@ public class SeleniumJT
 
 	/**
 	 * If element is not on the screen then selenium will try 20 times, twice a second for 10 seconds before finally declaring a failure
-	 * 
+	 *
 	 * @param locator
 	 */
 	@LogExecTime
@@ -514,9 +525,9 @@ public class SeleniumJT
 
 	/**
 	 * This text should appear on the screen.
-	 * 
+	 *
 	 * If text is not on the screen then selenium will try 20 times, twice a second for 10 seconds before finally declaring a failure
-	 * 
+	 *
 	 * @param text
 	 */
 	@LogExecTime
@@ -527,7 +538,7 @@ public class SeleniumJT
 
 	/**
 	 * This text should appear on the screen
-	 * 
+	 *
 	 * @param text
 	 */
 	@LogExecTime

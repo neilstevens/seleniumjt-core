@@ -90,7 +90,15 @@ public class JTInput
 		WebElement element = jtCore.getElement(locator);
 		Select selectBox = new Select(element);
 		selectBox.selectByValue(value);
-		
+
+	}
+
+	public void selectByText(String locator, String text) {
+		jtCore.waitForElementPresent(locator);
+		WebElement element = jtCore.getElement(locator);
+		Select selectBox = new Select(element);
+		selectBox.selectByVisibleText(text);
+
 	}
 
 	public String getValue(String locator)
@@ -109,6 +117,19 @@ public class JTInput
 		catch (Exception e)
 		{
 			Assert.fail("This method threw an exception while selecting " + value + " from " + locator + "." + e.getMessage());
+		}
+	}
+
+	public void selectByTextAndWait(String locator, String text)
+	{
+		selectByText(locator, text);
+		try
+		{
+			jtCore.waitForPageToLoad();
+		}
+		catch (Exception e)
+		{
+			Assert.fail("This method threw an exception while selecting by text " + text + " from " + locator + "." + e.getMessage());
 		}
 	}
 
