@@ -482,6 +482,17 @@ public class SeleniumJT
 	}
 
 	@LogExecTime
+	public void selectByIndexAndWait(String locator, int index)
+	{
+		jtInput.selectByIndexAndWait(locator, index);
+	}
+
+	public void selectByIndex(String locator, int index)
+	{
+		jtInput.selectByIndex(locator, index);
+	}
+
+	@LogExecTime
 	public void selectByTextAndWait(String locator, String value)
 	{
 		jtInput.selectByTextAndWait(locator, value);

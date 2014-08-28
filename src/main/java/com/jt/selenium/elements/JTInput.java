@@ -101,6 +101,14 @@ public class JTInput
 
 	}
 
+	public void selectByIndex(String locator, int index) {
+		jtCore.waitForElementPresent(locator);
+		WebElement element = jtCore.getElement(locator);
+		Select selectBox = new Select(element);
+		selectBox.selectByIndex(index);
+
+	}
+
 	public String getValue(String locator)
 	{
 		jtCore.waitForElementPresent(locator);
@@ -130,6 +138,19 @@ public class JTInput
 		catch (Exception e)
 		{
 			Assert.fail("This method threw an exception while selecting by text " + text + " from " + locator + "." + e.getMessage());
+		}
+	}
+
+	public void selectByIndexAndWait(String locator, int index)
+	{
+		selectByIndex(locator, index);
+		try
+		{
+			jtCore.waitForPageToLoad();
+		}
+		catch (Exception e)
+		{
+			Assert.fail("This method threw an exception while selecting by index " + index + " from " + locator + "." + e.getMessage());
 		}
 	}
 
